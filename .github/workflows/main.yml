@@ -1,0 +1,33 @@
+name: Release Packer
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Package and Upload
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          zip -r "${{ github.event.repository.name }}.zip" . -j -x "LICENSE" "README.md" ".git*" ".github*"
+          gh release upload ${{ github.event.release.tag_name }} "${{ github.event.repository.name }}.zip" --clobber
+
+      - name: Update latest branch
+        run: |
+          git config --global user.name "github-actions[bot]" && git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git checkout latest || git checkout -b latest
+          git reset --hard ${{ github.event.release.tag_name }}
+          git push origin latest --force
