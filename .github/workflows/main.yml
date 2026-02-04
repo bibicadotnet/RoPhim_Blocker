@@ -21,13 +21,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          zip -r "${{ github.event.repository.name }}.zip" . -x "LICENSE" "README.md" ".git*" ".github*"
-          gh release upload ${{ github.event.release.tag_name }} "${{ github.event.repository.name }}.zip" --clobber
+          REPO_NAME=${{ github.event.repository.name }}
+          zip -r "${REPO_NAME}.zip" . -x "LICENSE" "README.md" ".git*" ".github*"
+          gh release upload ${{ github.event.release.tag_name }} "${REPO_NAME}.zip" --clobber
 
       - name: Update latest branch
         run: |
           git config --global user.name "github-actions[bot]" && git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
           git checkout latest || git checkout -b latest
           git reset --hard ${{ github.event.release.tag_name }}
           git push origin latest --force
