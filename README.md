@@ -10,7 +10,7 @@
 
 **Cài đặt:**
 
-1. Tải mã nguồn về máy: [v2.0.zip](https://github.com/bibicadotnet/RoPhim_Blocker/archive/v2.0.zip)
+1. Tải mã nguồn về máy: [RoPhim_Blocker.zip](https://github.com/bibicadotnet/RoPhim_Blocker/releases/latest/download/RoPhim_Blocker.zip)
 2. Truy cập `chrome://extensions/` trên trình duyệt.
 3. Bật **Chế độ dành cho nhà phát triển** (Developer mode).
 4. Chọn **Tải tiện ích đã giải nén** (Load unpacked) và trỏ vào thư mục chứa code.
