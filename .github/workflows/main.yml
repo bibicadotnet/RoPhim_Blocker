@@ -21,7 +21,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          zip -r "${{ github.event.repository.name }}.zip" . -j -x "LICENSE" "README.md" ".git*" ".github*"
+          zip -r "${{ github.event.repository.name }}.zip" . -x "LICENSE" "README.md" ".git*" ".github*"
           gh release upload ${{ github.event.release.tag_name }} "${{ github.event.repository.name }}.zip" --clobber
 
       - name: Update latest branch
