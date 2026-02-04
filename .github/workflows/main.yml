@@ -24,6 +24,7 @@ jobs:
           REPO_NAME=${{ github.event.repository.name }}
           zip -r "${REPO_NAME}.zip" . -x "LICENSE" "README.md" ".git*" ".github*"
           gh release upload ${{ github.event.release.tag_name }} "${REPO_NAME}.zip" --clobber
+          echo "Download URL: https://github.com/${{ github.repository }}/releases/latest/download/${REPO_NAME}.zip"
 
       - name: Update latest branch
         run: |
