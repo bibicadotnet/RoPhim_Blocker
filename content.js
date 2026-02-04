@@ -51,6 +51,7 @@
           if (url) {
             const current = new URL(location.href);
             const targetUrl = new URL(url, location.href);
+            // Block same-origin popunder
             if (targetUrl.origin === current.origin) {
               return null;
             }
@@ -63,24 +64,13 @@
         return originalOpen.call(this, url, target, features);
       };
       
-      const originalReplace = location.replace;
-      location.replace = function(url) {
-        if (url && (url.includes('finallygotthexds.site') || 
-                    url.includes('promolink') ||
-                    url.includes('redirect'))) {
-          return;
-        }
-        return originalReplace.call(this, url);
-      };
-      
+      // Block addEventListener với popunder keywords
       const origAddEvent = EventTarget.prototype.addEventListener;
       EventTarget.prototype.addEventListener = function(type, listener, options) {
         if (type === 'click') {
           const listenerStr = listener ? listener.toString() : '';
           if (listenerStr.indexOf('isSwapping') > -1 || 
-              listenerStr.indexOf('popup') > -1 ||
-              listenerStr.indexOf('window.open') > -1 ||
-              listenerStr.indexOf('popu') > -1) {
+              listenerStr.indexOf('window.open') > -1) {
             return;
           }
         }

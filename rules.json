@@ -57,5 +57,15 @@
       "regexFilter": "image\\.cdend\\.com/.*\\.gif",
       "resourceTypes": ["image"]
     }
+  },
+  
+  {
+    "id": 7,
+    "priority": 1,
+    "action": {"type": "block"},
+    "condition": {
+      "urlFilter": "||goatembed.com/xml/",
+      "resourceTypes": ["xmlhttprequest"]
+    }
   }
 ]
