@@ -3,7 +3,7 @@
 
   const hostname = location.hostname.toLowerCase();
   if (!hostname.includes('rophim') && 
-      !hostname.includes('robong') && 
+      !hostname.includes('pepera') && 
       !hostname.includes('embedrb') && 
       !hostname.includes('goatembed')) {
     return;
@@ -83,4 +83,5 @@
   script.textContent = scriptContent;
   (document.head || document.documentElement).appendChild(script);
   script.remove();
+
 })();
